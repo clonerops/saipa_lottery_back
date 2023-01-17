@@ -1,4 +1,4 @@
-from .models import SalePlan, SalePlanDetail
+from .models import SalePlan, SalePlanDetail, Applicants
 from rest_framework import serializers
 
 
@@ -21,3 +21,9 @@ class SalePlansDetailSerializers(serializers.ModelSerializer):
         model = SalePlanDetail
         fields = ['Id', 'AnnounceNo', 'AnnounceRowNo', 'CirculationNo', 'CarRow', 'MainCapacity', 'ReserveCapacity',
                   'WindDistance', 'LotteryBaseNo', 'Description', 'SalePlans']
+
+
+class ApplicantSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Applicants
+        fields = '__all__'
