@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'drf_yasg',
 
     #     My Apps
-    'lottery.apps.LotteryConfig'
+    'lottery.apps.LotteryConfig',
+    'excel.apps.ExcelConfig',
 ]
 
 MIDDLEWARE = [
