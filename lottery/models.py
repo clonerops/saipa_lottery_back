@@ -3,19 +3,8 @@ import datetime
 from django.db import models
 from django.contrib.auth.models import User
 
-
 # Create your models here.
 from django.utils import timezone
-
-
-class Lottery(models.Model):
-    Id = models.IntegerField(primary_key=True, unique=True)
-    Title = models.CharField(max_length=255)
-    AnnounceNo = models.BigIntegerField()
-    CarRow = models.IntegerField()
-
-    def __str__(self):
-        return self.Title
 
 
 class SalePlan(models.Model):
@@ -32,3 +21,23 @@ class SalePlan(models.Model):
 
     def __str__(self):
         return self.Description
+
+
+class SalePlanDetail(models.Model):
+    Id = models.AutoField(primary_key=True)
+    AnnounceNo = models.IntegerField()
+    AnnounceRowNo = models.IntegerField()
+    CirculationNo = models.IntegerField()
+    CarRow = models.IntegerField()
+    MainCapacity = models.IntegerField()
+    ReserveCapacity = models.IntegerField()
+    WindDistance = models.IntegerField()
+    LotteryBaseNo = models.IntegerField()
+    SalePlans = models.ForeignKey(SalePlan, on_delete=models.CASCADE, related_name='SalePlans')
+    Description = models.TextField()
+    CreatedBy = models.ForeignKey(User, on_delete=models.CASCADE)
+    Created = models.DateTimeField(auto_now_add=True)
+    LastModified = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f'اطلاعیه شماره {self.AnnounceNo} و ردیف اطلاعیه {self.AnnounceRowNo}'

@@ -1,8 +1,8 @@
 from django.urls import path
-from .views import RetrieveAllSalePlans ,RetrieveAllLottories
+from .views import RetrieveAllSalePlans, RetrieveDetailSalePlans
 
 app_name = 'lottery'
 urlpatterns = [
     path('saleplans', RetrieveAllSalePlans.as_view(),  name='retrieve_all_saleplans'),
-    path('lottery', RetrieveAllLottories.as_view(),  name='retrieve_all_lottery')
+    path('saleplans/<int:pk>',  RetrieveDetailSalePlans.as_view(),  name='retrieve_saleplans_details')
 ]
