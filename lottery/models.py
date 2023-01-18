@@ -1,23 +1,23 @@
 import datetime
-
+from django_jalali.db import models as jmodels
 from django.db import models
 from django.contrib.auth.models import User
-
 # Create your models here.
 from django.utils import timezone
 
 
 class SalePlan(models.Model):
+    objects = jmodels.jManager()
     Id = models.AutoField(primary_key=True)
-    RegisterStartDate = models.DateTimeField()
-    RegisterEndDate = models.DateTimeField()
-    LotteryDate = models.DateTimeField()
-    Description = models.CharField(max_length=255)
-    ExtraDescription = models.TextField()
-    LastModifyBy = models.CharField(max_length=255)
-    LastModified = models.DateTimeField(auto_now=True)
-    CreatedBy = models.ForeignKey(User, on_delete=models.CASCADE)
-    CreatedAt = models.DateTimeField(auto_now_add=True)
+    RegisterStartDate = jmodels.jDateTimeField(verbose_name='تاریخ شروع ثبت نام')
+    RegisterEndDate = jmodels.jDateTimeField(verbose_name='تاریخ پایان ثبت نام')
+    LotteryDate = jmodels.jDateTimeField(verbose_name='تاریخ قرعه کشی')
+    Description = models.CharField(max_length=255, verbose_name='توضیحات')
+    ExtraDescription = models.TextField(verbose_name='توضیحات اضافی')
+    LastModifyBy = models.CharField(max_length=255, verbose_name='اخرین تغییر توسط')
+    LastModified = jmodels.jDateTimeField(auto_now=True, verbose_name='تاریخ آخرین تغییر')
+    CreatedBy = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='ایجاد شده توسط')
+    CreatedAt = jmodels.jDateTimeField(auto_now_add=True, verbose_name='تاریخ ایجاد')
 
     def __str__(self):
         return self.Description

@@ -1,4 +1,4 @@
-from datetime import datetime, date
+from datetime import date
 import xlwt
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -22,13 +22,16 @@ def Export_SalePlan_Excel(request):
     for column in range(len(columns)):
         worksheet.write(rowNumber, column, columns[column], font_style)
 
-    salePlans = SalePlan.objects.all().values_list("Description", "RegisterStartDate")
+    salePlans = SalePlan.objects.all().values_list("Description", "RegisterStartDate__year")
+
+    date_format = xlwt.XFStyle()
+    date_format.num_format_str = 'yyyy/mm/dd'
 
     for salePlan in salePlans:
         rowNumber += 1
 
         for column in range(len(salePlan)):
-            worksheet.write(rowNumber, column, salePlan[column])
+            worksheet.write(rowNumber, column, salePlan[column], date_format)
 
     workbook.save(response)
 
