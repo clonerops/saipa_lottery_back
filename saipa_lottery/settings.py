@@ -27,7 +27,6 @@ dotenv.read_dotenv()
 SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG')
-
 ALLOWED_HOSTS = ['*']
 
 # Application definition
@@ -43,13 +42,14 @@ INSTALLED_APPS = [
     #     My Package
     'rest_framework',
     "corsheaders",
+    'import_export',
     'drf_yasg',
 
     #     My Apps
     'lottery.apps.LotteryConfig',
     'excel.apps.ExcelConfig',
 ]
-
+CSRF_COOKIE_SECURE = True
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
